@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 from PIL import Image
@@ -203,6 +204,8 @@ class Q8(Question):
         return
 
 if __name__ == '__main__':
+    os.chdir('Questions')
+
     q1 = Q1("ch1.png")
     q1.solve()
 
