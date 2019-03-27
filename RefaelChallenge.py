@@ -59,8 +59,6 @@ class Q2(Question):
         _, mask = cv2.threshold(alpha_channel, 254, 255, cv2.THRESH_BINARY)  # binarize mask
         color = img[:, :, :3]
         new_img = cv2.bitwise_not(cv2.bitwise_not(color, mask=mask))
-        plot(new_img)
-
         ret = self.filters(new_img)
         for i in ret:
             plot(i)
@@ -74,7 +72,7 @@ class Q3(Question):
         palette[492] = palette[493] = palette[494] = 255
         img = self.img_obj
         img.putpalette(palette)
-        Image._show(img)
+        plot(img)
         return
 
     def solve(self):
@@ -110,12 +108,10 @@ class Q5(Question):
         return morph_img
 
     def solve(self):
-
         r_img1 = self.img_obj.resize((1000, 800))
-        r_img1.save('temp.png', 'png')
-        plot(self.morph(r_img1, (1,2)))
+        show(self.morph(r_img1, (1,2)))
         r_img2 = self.img_obj.resize((1500, 900))
-        plot(self.morph(r_img2, (1,2)))
+        show(self.morph(r_img2, (1,2)))
 
         return
 
@@ -185,7 +181,7 @@ class Q7(Question):
         for pt in zip(*loc[::-1]):
             cv2.rectangle(img1, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
 
-        print "Answer " + str(maxLoc)
+        print "Q7 Answer %d#%d" % (maxLoc)
 
         return
 
@@ -200,7 +196,7 @@ class Q8(Question):
         sortedKeys = sorted(lineDict.keys(), reverse=True)
         for y in range(len(sortedKeys)):
             res[y, :, :] = img[lineDict[sortedKeys[y]], :, :]
-        plot(res)
+        show(res)
         return
 
 if __name__ == '__main__':
